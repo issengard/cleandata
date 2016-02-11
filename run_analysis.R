@@ -5,48 +5,49 @@ download.file(url,"data.zip")
 
 unzip("data.zip")
 
-list.files()
 
 ##You should create one R script called run_analysis.R that does the following.
 ##Merges the training and the test sets to create one data set.
 
 #Exploring Data#
-setwd("UCI HAR Dataset")
-
 list.files()
 
 #Loads labels DB
-labels=read.table("activity_labels.txt",header=F,col.names=c("id","activity"))
+labels=read.table("UCI HAR Dataset/activity_labels.txt",header=F,col.names=c("id","activity"))
 
 #Loads features DB
-features=read.table("features.txt",header=F)
+features=read.table("UCI HAR Dataset/features.txt",header=F)
 
 #Cleans parentheses from features DB
 features$V2=gsub("\\(|\\)","",features$V2)
 
 #Training#
-list.files("train")
+list.files("UCI HAR Dataset/train")
 
 #Loads the training labels DB
-train = read.table("train/Y_train.txt",col.names = "id")
+train = read.table("UCI HAR Dataset/train/Y_train.txt",col.names = "id")
 
 #Appends the training subjects DB
-train = cbind(train,read.table("train/subject_train.txt",col.names = "subject"))
+train = cbind(train,read.table("UCI HAR Dataset/train/subject_train.txt",
+                               col.names = "subject"))
 
 #Appends the training set DB
-train = cbind(train,read.table("train/X_train.txt",col.names = features[,2]))
+train = cbind(train,read.table("UCI HAR Dataset/train/X_train.txt",
+                               col.names = features[,2]))
 
 #Testing#
-list.files("test")
+list.files("UCI HAR Dataset/test")
 
 #Loads the test labels DB
-test = read.table("test/y_test.txt",col.names ="id")
+test = read.table("UCI HAR Dataset/test/y_test.txt",col.names ="id")
 
 #Appends the test subjects DB
-test = cbind(test,read.table("test/subject_test.txt",col.names = "subject"))
+test = cbind(test,read.table("UCI HAR Dataset/test/subject_test.txt",
+                             col.names = "subject"))
 
 #Appends the test set DB
-test = cbind(test,read.table("test/X_test.txt",col.names = features[,2]))
+test = cbind(test,read.table("UCI HAR Dataset/test/X_test.txt",
+                             col.names = features[,2]))
 
 #Merging Training and Test#
 merged = rbind(train,test)
@@ -66,7 +67,7 @@ merged = merge(merged,labels,by="id")
 merged = merged[,c(82,2:81)]
 
 #Saving progress
-write.csv(merged,"merged.csv",row.names = F)
+write.table(merged,"merged.txt",row.names = F)
 
 ##Appropriately labels the data set with descriptive variable names.
 #Puts all names and activities in lowercase
@@ -96,7 +97,7 @@ names(merged) = gsub("bodybody","body",names(merged))
 str(merged)
 
 #Saving progress
-write.csv(merged,"merged.csv",row.names = F)
+write.table(merged,"merged.txt",row.names = F)
 
 ##From the data set in step 4, creates a second, independent tidy data set
 ##with the average of each variable for each activity and each subject.
@@ -106,5 +107,5 @@ tidy = aggregate(.~subject + activity, merged, mean)
 
 tidy = tidy[order(tidy$subject,tidy$activity),]
 
-write.csv(tidy,"tidy.csv",row.names = F)
+write.table(tidy,"tidy.txt",row.names = F)
 
