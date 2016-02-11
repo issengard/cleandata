@@ -30,10 +30,90 @@ This script automatically downloads and extracts the UCI HAR Datasets into the w
 9. Creates a new database with the average of each variable for each activity and each subject.Save the new database into **"tidy.txt"**.
 
 ##Variable names
+|Variable                        |Original Name                 |
+|:-------------------------------|:-----------------------------|
+|activity                        |activity                      |
+|subject                         |subject                       |
+|tbodyacc.mean.x                 |tBodyAcc.mean.X               |
+|tbodyacc.mean.y                 |tBodyAcc.mean.Y               |
+|tbodyacc.mean.z                 |tBodyAcc.mean.Z               |
+|tbodyacc.sd.x                   |tBodyAcc.std.X                |
+|tbodyacc.sd.y                   |tBodyAcc.std.Y                |
+|tbodyacc.sd.z                   |tBodyAcc.std.Z                |
+|tgravityacc.mean.x              |tGravityAcc.mean.X            |
+|tgravityacc.mean.y              |tGravityAcc.mean.Y            |
+|tgravityacc.mean.z              |tGravityAcc.mean.Z            |
+|tgravityacc.sd.x                |tGravityAcc.std.X             |
+|tgravityacc.sd.y                |tGravityAcc.std.Y             |
+|tgravityacc.sd.z                |tGravityAcc.std.Z             |
+|tbodyaccjerk.mean.x             |tBodyAccJerk.mean.X           |
+|tbodyaccjerk.mean.y             |tBodyAccJerk.mean.Y           |
+|tbodyaccjerk.mean.z             |tBodyAccJerk.mean.Z           |
+|tbodyaccjerk.sd.x               |tBodyAccJerk.std.X            |
+|tbodyaccjerk.sd.y               |tBodyAccJerk.std.Y            |
+|tbodyaccjerk.sd.z               |tBodyAccJerk.std.Z            |
+|tbodygyro.mean.x                |tBodyGyro.mean.X              |
+|tbodygyro.mean.y                |tBodyGyro.mean.Y              |
+|tbodygyro.mean.z                |tBodyGyro.mean.Z              |
+|tbodygyro.sd.x                  |tBodyGyro.std.X               |
+|tbodygyro.sd.y                  |tBodyGyro.std.Y               |
+|tbodygyro.sd.z                  |tBodyGyro.std.Z               |
+|tbodygyrojerk.mean.x            |tBodyGyroJerk.mean.X          |
+|tbodygyrojerk.mean.y            |tBodyGyroJerk.mean.Y          |
+|tbodygyrojerk.mean.z            |tBodyGyroJerk.mean.Z          |
+|tbodygyrojerk.sd.x              |tBodyGyroJerk.std.X           |
+|tbodygyrojerk.sd.y              |tBodyGyroJerk.std.Y           |
+|tbodygyrojerk.sd.z              |tBodyGyroJerk.std.Z           |
+|tbodyaccmagnitude.mean          |tBodyAccMag.mean              |
+|tbodyaccmagnitude.sd            |tBodyAccMag.std               |
+|tgravityaccmagnitude.mean       |tGravityAccMag.mean           |
+|tgravityaccmagnitude.sd         |tGravityAccMag.std            |
+|tbodyaccjerkmagnitude.mean      |tBodyAccJerkMag.mean          |
+|tbodyaccjerkmagnitude.sd        |tBodyAccJerkMag.std           |
+|tbodygyromagnitude.mean         |tBodyGyroMag.mean             |
+|tbodygyromagnitude.sd           |tBodyGyroMag.std              |
+|tbodygyrojerkmagnitude.mean     |tBodyGyroJerkMag.mean         |
+|tbodygyrojerkmagnitude.sd       |tBodyGyroJerkMag.std          |
+|fbodyacc.mean.x                 |fBodyAcc.mean.X               |
+|fbodyacc.mean.y                 |fBodyAcc.mean.Y               |
+|fbodyacc.mean.z                 |fBodyAcc.mean.Z               |
+|fbodyacc.sd.x                   |fBodyAcc.std.X                |
+|fbodyacc.sd.y                   |fBodyAcc.std.Y                |
+|fbodyacc.sd.z                   |fBodyAcc.std.Z                |
+|fbodyacc.meanfreq.x             |fBodyAcc.meanFreq.X           |
+|fbodyacc.meanfreq.y             |fBodyAcc.meanFreq.Y           |
+|fbodyacc.meanfreq.z             |fBodyAcc.meanFreq.Z           |
+|fbodyaccjerk.mean.x             |fBodyAccJerk.mean.X           |
+|fbodyaccjerk.mean.y             |fBodyAccJerk.mean.Y           |
+|fbodyaccjerk.mean.z             |fBodyAccJerk.mean.Z           |
+|fbodyaccjerk.sd.x               |fBodyAccJerk.std.X            |
+|fbodyaccjerk.sd.y               |fBodyAccJerk.std.Y            |
+|fbodyaccjerk.sd.z               |fBodyAccJerk.std.Z            |
+|fbodyaccjerk.meanfreq.x         |fBodyAccJerk.meanFreq.X       |
+|fbodyaccjerk.meanfreq.y         |fBodyAccJerk.meanFreq.Y       |
+|fbodyaccjerk.meanfreq.z         |fBodyAccJerk.meanFreq.Z       |
+|fbodygyro.mean.x                |fBodyGyro.mean.X              |
+|fbodygyro.mean.y                |fBodyGyro.mean.Y              |
+|fbodygyro.mean.z                |fBodyGyro.mean.Z              |
+|fbodygyro.sd.x                  |fBodyGyro.std.X               |
+|fbodygyro.sd.y                  |fBodyGyro.std.Y               |
+|fbodygyro.sd.z                  |fBodyGyro.std.Z               |
+|fbodygyro.meanfreq.x            |fBodyGyro.meanFreq.X          |
+|fbodygyro.meanfreq.y            |fBodyGyro.meanFreq.Y          |
+|fbodygyro.meanfreq.z            |fBodyGyro.meanFreq.Z          |
+|fbodyaccmagnitude.mean          |fBodyAccMag.mean              |
+|fbodyaccmagnitude.sd            |fBodyAccMag.std               |
+|fbodyaccmagnitude.meanfreq      |fBodyAccMag.meanFreq          |
+|fbodyaccjerkmagnitude.mean      |fBodyBodyAccJerkMag.mean      |
+|fbodyaccjerkmagnitude.sd        |fBodyBodyAccJerkMag.std       |
+|fbodyaccjerkmagnitude.meanfreq  |fBodyBodyAccJerkMag.meanFreq  |
+|fbodygyromagnitude.mean         |fBodyBodyGyroMag.mean         |
+|fbodygyromagnitude.sd           |fBodyBodyGyroMag.std          |
+|fbodygyromagnitude.meanfreq     |fBodyBodyGyroMag.meanFreq     |
+|fbodygyrojerkmagnitude.mean     |fBodyBodyGyroJerkMag.mean     |
+|fbodygyrojerkmagnitude.sd       |fBodyBodyGyroJerkMag.std      |
+|fbodygyrojerkmagnitude.meanfreq |fBodyBodyGyroJerkMag.meanFreq |
 
-```{r, results='asis',echo=FALSE}
-print(namevars)
-```
 <p>The naming structure adopted was:</p>
 <p>**{f|t}{body|gravity}{acc|gyro}.{magnitude|mean|sd}.{x|y|x}**</p>
 <p>where:</p>
