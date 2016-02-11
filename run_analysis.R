@@ -13,7 +13,8 @@ unzip("data.zip")
 list.files()
 
 #Loads labels DB
-labels=read.table("UCI HAR Dataset/activity_labels.txt",header=F,col.names=c("id","activity"))
+labels=read.table("UCI HAR Dataset/activity_labels.txt",
+                  header=F,col.names=c("id","activity"))
 
 #Loads features DB
 features=read.table("UCI HAR Dataset/features.txt",header=F)
@@ -53,7 +54,7 @@ test = cbind(test,read.table("UCI HAR Dataset/test/X_test.txt",
 merged = rbind(train,test)
 
 #Saving Progress
-write.csv(merged,"merged.csv",row.names = F)
+write.table(merged,"merged.txt",row.names = F, col.names = T)
 rm(test,train)
 
 ##Extracts only the measurements on the mean and standard deviation for each measurement.
@@ -67,7 +68,10 @@ merged = merge(merged,labels,by="id")
 merged = merged[,c(82,2:81)]
 
 #Saving progress
-write.table(merged,"merged.txt",row.names = F)
+write.table(merged,"merged.txt",row.names = F, col.names = T)
+
+#Stores variable names
+name = names(merged)
 
 ##Appropriately labels the data set with descriptive variable names.
 #Puts all names and activities in lowercase
@@ -83,21 +87,22 @@ names(merged) = gsub("std","sd",names(merged))
 
 names(merged) = gsub("mag","magnitude",names(merged))
 
-names(merged) = gsub("acc","accelerometer",names(merged))
-
-names(merged) = gsub("gyro","gyroscope",names(merged))
-
-names(merged) = gsub("^t","time",names(merged))
-
-names(merged) = gsub("^f","frequency",names(merged))
-
 names(merged) = gsub("bodybody","body",names(merged))
 
 #Check the structure of cleaned DB
 str(merged)
 
 #Saving progress
-write.table(merged,"merged.txt",row.names = F)
+write.table(merged,"merged.txt",row.names = F,col.names = T)
+
+#Stores modified variable names
+name2 = names(merged)
+
+namevars = cbind(name2,name)
+
+colnames(namevars) = c("Variable", "Original Name")
+
+rm(name,name2)
 
 ##From the data set in step 4, creates a second, independent tidy data set
 ##with the average of each variable for each activity and each subject.
@@ -107,5 +112,5 @@ tidy = aggregate(.~subject + activity, merged, mean)
 
 tidy = tidy[order(tidy$subject,tidy$activity),]
 
-write.table(tidy,"tidy.txt",row.names = F)
+write.table(tidy,"tidy.txt",row.names = F, col.names = T)
 
